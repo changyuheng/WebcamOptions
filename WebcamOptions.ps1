@@ -33,5 +33,5 @@ if ($cameras.Length -gt 1) {
   }
 }
 
-& $PSScriptRoot\bin\ffmpeg.exe -f dshow -list_options true -i video="$($cameras[$camera_index])" 2>&1
+& $PSScriptRoot\bin\ffmpeg.exe -f dshow -list_options true -i video="$($cameras[$camera_index])"
 pause
