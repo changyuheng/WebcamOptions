@@ -33,5 +33,9 @@ if ($cameras.Length -gt 1) {
   }
 }
 
-& $PSScriptRoot\bin\ffmpeg.exe -f dshow -list_options true -i video="$($cameras[$camera_index])"
+& $PSScriptRoot\bin\ffmpeg.exe -f dshow -list_options true -i video="$($cameras[$camera_index])" 2>&1 `
+    | Select-String -Pattern '^\[dshow @ [A-Za-z0-9]+\] (.*)$' `
+    | Select-Object Matches | ForEach-Object {
+  Write-Output $_.Matches.Groups[1].Value
+}
 pause
